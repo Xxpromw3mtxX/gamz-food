@@ -8,33 +8,33 @@ Config.Zones = {
 
         ["drink"] = {
             ["Coca Cola"] = {
-                ["price"] = 20,
+                ["price"] = 1500,
                 ["prop"] = "prop_ecola_can"
             },
 
             ["Sparkling Water"] = {
-                ["price"] = 15,
+                ["price"] = 1000,
                 ["prop"] = "prop_ld_flow_bottle"
             } 
         },
         
         ["eatable"] = {
             ["Burger"] = {
-                ["price"] = 79,
+                ["price"] = 1000,
                 ["prop"] = "prop_cs_burger_01"
             },
 
             ["Hotdog"] = {
-                ["price"] = 79,
+                ["price"] = 1500,
                 ["prop"] = "prop_cs_hotdog_01"
             }
 
         }
     }, -- You can add more spots by just copying this one and changing the values
 
-    ["Gyro Day"] = {
+    --[[["Gyro Day"] = {
         ["coords"] = vector3(461.50152587891, -699.02325439453, 27.402139663696)
-    }
+    }]]
 
 }
 
@@ -52,14 +52,14 @@ Config.Anims = { -- if you want to change the animation
 
 Config.eatable = { -- if you have not choosed any food for a certain zone it will automatically get this
     ["Hotdog"] = {
-        ["price"] = 79,
+        ["price"] = 1500,
         ["prop"] = "prop_cs_hotdog_01"
     }
 }
 
 Config.drink = { -- if you have not choosed any drinks for a certain zone it will automatically get this
     ["Sparkling Water"] = {
-        ["price"] = 15,
+        ["price"] = 1000,
         ["prop"] = "prop_ld_flow_bottle"
     }
 }
