@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
 		local blip = AddBlipForCoord(value["coords"].x, value["coords"].y)
 		SetBlipSprite (blip, 238)
 		SetBlipDisplay(blip, 4)
-		SetBlipScale  (blip, 0.6)
+		SetBlipScale  (blip, 1.0)
 		SetBlipColour (blip, 69)
 		SetBlipAsShortRange(blip, true)
 		BeginTextCommandSetBlipName("STRING")
@@ -52,10 +52,10 @@ FoodStand = function(place)
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'food_stand',
     {
         title    = place,
-        align    = 'center',
+        align    = 'bottom-right',
         elements = {
-            { ["label"] = "Food", ["type"] = "eatable" },
-            { ["label"] = "Drinks", ["type"] = "drink" }
+            { ["label"] = "Cibo", ["type"] = "eatable" },
+            { ["label"] = "Bevande", ["type"] = "drink" }
         }
     }, function(data, menu)
 
@@ -88,29 +88,20 @@ FoodMenu = function(place, type)
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'food_menu',
     {
         title    = place,
-        align    = 'center',
+        align    = 'bottom-right',
         elements = elements
     }, function(data, menu)
         
         ESX.UI.Menu.CloseAll()
 
-        if MoneyCheck(data.current.price) then
-            TriggerServerEvent("gamz-food:removeMoney", data.current.price)
-
-            ESX.ShowNotification("You bought a " .. data.current.label)
-
-            Consume(data.current.prop, type)
-        else
-            ESX.ShowNotification("You do not have enough cash")
-        end
-
+        TriggerServerEvent("gamz-food:removeMoney", data.current.price, data.current.prop, type)
     end, function(data, menu)
         menu.close() 
     end)
 end
 
-Consume = function(prop, type)
-
+RegisterNetEvent('gamz-food:consumeFood')
+AddEventHandler('gamz-food:consumeFood', function(prop, type)
     if consuming then
         return
     end
@@ -142,13 +133,11 @@ Consume = function(prop, type)
 
     for i=1, 50 do
         Wait(300)
-        TriggerEvent('esx_status:add', type, 10000)
-      --  exports["gamz-status"]:SetStatus("Hunger", 0.7)
+        TriggerEvent('esx_status:add', hot, 1500)
     end
     
     ClearPedSecondaryTask(PlayerPedId())
     DeleteObject(prop)
 
     consuming = false
-
-end
+end)
