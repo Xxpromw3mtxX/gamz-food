@@ -133,7 +133,7 @@ AddEventHandler('gamz-food:consumeFood', function(prop, type)
 
     for i=1, 50 do
         Wait(300)
-        TriggerEvent('esx_status:add', hot, 1500)
+        TriggerEvent('esx_status:add', type, 2000)
     end
     
     ClearPedSecondaryTask(PlayerPedId())
